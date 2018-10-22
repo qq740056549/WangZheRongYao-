@@ -6,10 +6,8 @@ public class Main {
 		int x,y;
 		String action;
 		Scanner reader=new Scanner(System.in);
-		System.out.println("请输入战场规模：");
-		n=reader.nextInt();
-		m=reader.nextInt();
-		Map gameBoard=new Map(n,m);
+		System.out.println("战场初始化如下");
+		Map gameBoard=new Map(10,10);
 		gameBoard.showMap();
 		gameBoard.setHero();
 		gameBoard.setMap();
