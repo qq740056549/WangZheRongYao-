@@ -4,7 +4,7 @@ import java.util.*;
 
 
 class Map{
-	private char map[][];
+	public char map[][];
 	private int n,m;
 	private int HeroNum;
 	private Hero hero[];
@@ -35,6 +35,7 @@ class Map{
 				System.out.print(map[i][j]+" ");
 			System.out.println();
 		}
+		System.out.println("-------------------------");
 	}
 	public void setHero() {
 		Scanner reader=new Scanner(System.in);
@@ -120,13 +121,16 @@ class Map{
 			System.out.println("有障碍物阻挡，移动失败，请重新输入");
 			return 0;
 		}
-		if(n<0||n>9||m<0||m>9) {
+		else if(n<0||n>9||m<0||m>9) {
 			System.out.println("超出边界，移动失败，请重新输入");
 			return 0;
 		}
-		if(map[n][m]=='*') {
+		else if(map[n][m]=='*') {
 			System.out.println("前方有尸体，移动失败，请重新输入");
 			return 0;
+		}
+		else if(map[n][m]!='.') {
+			System.out.println("前方位置有英雄，请重新输入");
 		}
 		return 1;
 	}
@@ -142,6 +146,15 @@ class Map{
 		System.out.println("被攻击者是： "+hero[defend].getForm());
 		if(hero[attack].IfCanAttack(hero[defend])==1) {
 			hero[defend].setHp(hero[attack].getAttack());
+			int p,q;
+			for(p=hero[attack].getN(),q=hero[attack].getM()-1;q>hero[defend].getM();q--) {
+				map[p][q]='~';
+				showMap();
+				}
+			for(p=hero[attack].getN(),q=hero[attack].getM()-1;q>hero[defend].getM();q--) {
+				map[p][q]='.';
+				//showMap();
+				}
 			if(hero[defend].IfCanAttack(hero[attack])==1) {
 				hero[attack].setHp(hero[defend].getAttack());
 			}
@@ -163,7 +176,7 @@ class Map{
 			hero[defend].upDate();
 		}
 }
-	void useSkill(char form,String skill) {
+	public void useSkill(char form,String skill) {
 		for(int i=0;i<HeroNum;i++) {
 			if(hero[i].getForm()==form) {
 				if(skill.equals("ZhiLiao")) {
@@ -176,8 +189,8 @@ class Map{
 					Move(form,dir);
 					Move(form,dir);
 					System.out.println(form+"使用技能闪现");
-			
-		}
+					
+				}
 			}
 		}
 		

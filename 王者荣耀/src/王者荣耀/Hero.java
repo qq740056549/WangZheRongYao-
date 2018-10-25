@@ -114,7 +114,7 @@ class Hero{
 	
 	public int IsDie() {
 		if(getHp()<=0) {
-			System.out.println("Ó¢ÐÛ"+getForm()+"ËÀÍö");
+			//System.out.println("Ó¢ÐÛ"+getForm()+"ËÀÍö");
 			return 1;
 		}
 		return 0;
