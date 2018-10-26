@@ -3,12 +3,14 @@ package 王者荣耀;
 import java.util.*;
 
 
-class Map{
+class Map implements Operation{
 	public char map[][];
 	private int n,m;
 	private int HeroNum;
 	private Hero hero[];
+	public Master master[];
 	public Map(int n,int m){
+		
 		n=10;
 		m=10;
 		this.n=n;
@@ -28,6 +30,11 @@ class Map{
 		map[4][3]='—';
 		map[7][2]='—';
 		map[7][5]='—';
+		map[0][1]='&'; 
+		map[2][2]='$';
+		map[7][4]='^';
+		map[4][8]='#';
+		map[9][9]='@';
 	}
 	public void showMap(){
 		for(int i=0;i<n;i++){
@@ -62,6 +69,17 @@ class Map{
 				continue;
 			}
 			hero[i].initHero(hp, mp, exp, n, m, form,attack,ad);
+		}
+		int k=0;
+		master=new Master[5];
+		for(int i=0;i<10;i++)
+			for(int j=0;j<10;j++) {
+				if(map[i][j]!='.'&&map[i][j]!='|'&&map[i][j]!='—') {
+					master[k++].setXY(i, j);
+				}
+			}
+		for(int i=0;i<5;i++) {
+			master[i].setMaster(i+1);
 		}
 	}
 	public void setMap(){
@@ -146,17 +164,70 @@ class Map{
 		System.out.println("被攻击者是： "+hero[defend].getForm());
 		if(hero[attack].IfCanAttack(hero[defend])==1) {
 			hero[defend].setHp(hero[attack].getAttack());
-			int p,q;
-			for(p=hero[attack].getN(),q=hero[attack].getM()-1;q>hero[defend].getM();q--) {
-				map[p][q]='~';
-				showMap();
+			int p,q,flag=0;
+			if(hero[attack].getN()==hero[defend].getN()) {
+				if(hero[defend].getM()<hero[attack].getN()) {
+					for(p=hero[attack].getN(),q=hero[attack].getM()-1;q>hero[defend].getM();q--) {
+						if(map[p][q]!='.')
+							flag++;
+					}
+					if(flag==0) {
+						for(p=hero[attack].getN(),q=hero[attack].getM()-1;q>hero[defend].getM();q--) {
+						map[p][q]='~';
+					showMap();
+						}
+					for(p=hero[attack].getN(),q=hero[attack].getM()-1;q>hero[defend].getM();q--) {
+						map[p][q]='.';
+						//showMap();
+							}
+					}
+					else
+						flag=0;
 				}
-			for(p=hero[attack].getN(),q=hero[attack].getM()-1;q>hero[defend].getM();q--) {
-				map[p][q]='.';
-				//showMap();
+				else {
+						for(p=hero[attack].getN(),q=hero[attack].getM()-1;q>hero[defend].getM();q--) {
+							if(map[p][q]!='.')
+								flag++;
+						}
+						if(flag==0) {
+							for(p=hero[attack].getN(),q=hero[attack].getM()-1;q<hero[defend].getM();q++) {
+						map[p][q]='~';
+						showMap();
+							}
+							for(p=hero[attack].getN(),q=hero[attack].getM()-1;q<hero[defend].getM();q++) {
+						map[p][q]='.';
+						//showMap();
+						}
+						}
+						else 
+							flag=0;
 				}
-			if(hero[defend].IfCanAttack(hero[attack])==1) {
-				hero[attack].setHp(hero[defend].getAttack());
+			}
+			if(hero[attack].getM()==hero[defend].getM()) {
+				for(p=hero[attack].getN(),q=hero[attack].getM()-1;q>hero[defend].getM();q--) {
+					if(map[p][q]!='.')
+						flag++;
+				}
+			}
+			if(flag==0) {
+				if(hero[attack].getN()<hero[defend].getN()) {
+					for(p=hero[attack].getM(),q=hero[attack].getN()+1;q<hero[defend].getN();q++) {
+						map[q][p]='~';
+						showMap();
+					}
+					for(p=hero[attack].getM(),q=hero[attack].getN()+1;q<hero[defend].getN();q++) {
+						map[q][p]='.';
+					}
+				}
+				else {
+					for(p=hero[attack].getM(),q=hero[attack].getN()-1;q>hero[defend].getN();q--) {
+						map[q][p]='~';
+						showMap();
+					}
+					for(p=hero[attack].getM(),q=hero[attack].getN()-1;q>hero[defend].getN();q--) {
+						map[q][p]='.';
+					}
+				}
 			}
 		}
 		int die1=hero[defend].IsDie(),die2=hero[attack].IsDie();

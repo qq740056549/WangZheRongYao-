@@ -1,6 +1,6 @@
 package ÍõÕßÈÙÒ«;
 import java.util.*;
-class Hero{
+class Hero {
 	private int hp;
 	private int mp;
 	private int exp;
@@ -111,12 +111,24 @@ class Hero{
 			return 0;
 		}
 }
-	
+	public int IfCanAttack(Master t) {
+		int n1=this.getN(),m1=this.getM();
+		int n2=t.x,m2=t.y;
+		int d1=(n1-n2)*(n1-n2)+(m1-m2)*(m1-m2);
+		if(d1<=this.getAttackDistance()*this.getAttackDistance()) {
+			System.out.println(form+"µÄ¹¥»÷¾àÀë×ã¹»¹¥»÷µ½Ò°¹Ö");
+			return 1;
+		}	
+		else {
+			System.out.println(form+"µÄ¹¥»÷¾àÀë²»×ãÒÔ¹¥»÷µ½Ò°¹Ö");
+			return 0;
+		}
+}
 	public int IsDie() {
 		if(getHp()<=0) {
-			//System.out.println("Ó¢ĞÛ"+getForm()+"ËÀÍö");
+			System.out.println("Ó¢ĞÛ"+getForm()+"ËÀÍö");
 			return 1;
 		}
 		return 0;
-}
+	}
 }

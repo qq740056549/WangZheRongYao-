@@ -1,7 +1,7 @@
 package ÍõÕßÈÙÒ«;
 
-class Operation {
-	public void Move(char form,char direction) {
-		
-	}
+public interface Operation {
+	public void useSkill(char form,String skill);
+	public void attack(char attacker,char defender);
+	public void Move(char form,char direction);
 }
