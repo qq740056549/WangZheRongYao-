@@ -1,5 +1,11 @@
 package 王者荣耀;
 import java.util.*;
+/**
+ * 
+ * @author 陈建荣 2017192038
+ * @version 王者4.0
+ *
+ */
 class Hero {
 	private int hp;
 	private int mp;
@@ -34,6 +40,17 @@ class Hero {
 	public void setAttack() {
 		this.attack = getAttack()+3;
 	}
+	/**
+	 * 英雄初始化函数，将输入的各属性赋给英雄
+	 * @param hp 血量
+	 * @param mp 魔法值
+	 * @param exp 经验值
+	 * @param n 在地图矩阵中的行
+	 * @param m 在地图矩阵中的列
+	 * @param form 在地图显示的形象
+	 * @param attack 攻击力
+	 * @param ad 攻击距离
+	 */
 	public void initHero(int hp,int mp,int exp,int n,int m,char form,int attack,int ad){
 		this.hp=hp;
 		this.mp=mp;
@@ -88,6 +105,10 @@ class Hero {
 	void setMaxHp() {
 		maxHp=getMaxHp()+5;
 	}
+	/**
+	 * 数据更新，如果经验值满足升级的要求，则等级会提升，同时各属性也会有所提升。
+	 * 这个函数就用来更新升级后的英雄属性
+	 */
 	public void upDate() {
 		if(exp>=level*10) {
 			setMaxHp();
@@ -98,6 +119,11 @@ class Hero {
 			System.out.println(form+"已升级");
 		}
 	}
+	/**
+	 * 判断攻击距离是否足够攻击到对方英雄，够则进行攻击，不够则攻击失败，浪费一次攻击的机会
+	 * @param t 被攻击的英雄
+	 * @return 可以攻击返回1，反之返回0
+	 */
 	public int IfCanAttack(Hero t) {
 		int n1=this.getN(),m1=this.getM();
 		int n2=t.getN(),m2=t.getM();
@@ -111,6 +137,11 @@ class Hero {
 			return 0;
 		}
 }
+	/**
+	 * 判断攻击距离是否足够攻击到对方野怪，够则进行攻击，不够则攻击失败，浪费一次攻击的机会
+	 * @param t 被攻击的野怪
+	 * @return 可以攻击返回1，反之返回0
+	 */
 	public int IfCanAttack(Master t) {
 		int n1=this.getN(),m1=this.getM();
 		int n2=t.x,m2=t.y;
@@ -124,6 +155,10 @@ class Hero {
 			return 0;
 		}
 }
+	/**
+	 * 判断英雄是否死亡，hp<=0则死亡
+	 * @return 死亡返回1，反之返回0
+	 */
 	public int IsDie() {
 		if(getHp()<=0) {
 			System.out.println("英雄"+getForm()+"死亡");
