@@ -1,10 +1,42 @@
 package 王者荣耀;
+import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.Buffer;
 import java.util.*;
+import javax.swing.*;
 public class Main {
-	public static void main(String []args){
+	private Object test;
+
+	public static void main(String []args) throws Throwable{
+		JFrame frame=new JFrame("wangzhe");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(500, 400);
+	
+		JLabel lable=new JLabel();
+		frame.add(lable);
+		JButton atk=new JButton("attak");
+		JButton move=new JButton("move");
+		frame.add(atk,BorderLayout.BEFORE_FIRST_LINE);
+		frame.add(move,BorderLayout.BEFORE_LINE_BEGINS);
+		MouseAdapter listen=new MouseAdapter() {
+			
+		};
+		frame.setVisible(false);
+		
+		
+		
+		File file=new File("操作.txt");
+		BufferedReader fcin=new BufferedReader(new FileReader(file));
+		
+		
 		int n,m; 
 		int x,y;
-		String action; //操作指令
+		String action = null; //操作指令
 		Scanner reader=new Scanner(System.in);
 		System.out.println("战场初始化如下");
 		Map gameBoard=new Map(10,10); //初始化战场（地图）
@@ -13,31 +45,13 @@ public class Main {
 		gameBoard.setMap(); //将英雄形象更新到地图
 		System.out.println("全军出击");
 		gameBoard.showMap(); //英雄初始化后输出
-		
-		while(reader.hasNext()) {
-			action=reader.next();//输入操作
-			if(action.equals("move")) {//移动操作
-				char form,direction; 
-				form=reader.next().charAt(0); //输入进行移动的英雄
-				direction=reader.next().charAt(0); //输入移动的方向
-				gameBoard.Move(form, direction); //进行移动
-				gameBoard.showMap(); //移动后输出
-			}
-			if(action.equals("attack")) {// 攻击操作
-				char attacker,defender;
-				attacker=reader.next().charAt(0); //输入攻击英雄
-				defender=reader.next().charAt(0); //输入被攻击英雄
-				gameBoard.attack(attacker, defender); //攻击操作
-				gameBoard.showMap(); 
-			}
-			if(action.equals("skill")) {//使用技能
-				char form;
-				form=reader.next().charAt(0); //输入使用技能的英雄
-				String skill;
-				skill=reader.next(); //使用使用的技能
-				gameBoard.useSkill(form, skill); //使用技能
-				gameBoard.showMap();
-			}
+		Thread1 thread1=new Thread1(gameBoard);
+		Thread2 thread2=new Thread2(fcin,gameBoard);
+		while(fcin.readLine()!=null) {
+			thread2.run(action);
+			thread1.run();
 		}
 	}
 }
+
+

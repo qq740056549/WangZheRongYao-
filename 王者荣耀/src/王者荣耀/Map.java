@@ -1,6 +1,12 @@
 package 王者荣耀;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import org.apache.log4j.Logger;
+import org.w3c.dom.Text;
 /**
  * 
  * @author 陈建荣 2017192038
@@ -76,21 +82,41 @@ class Map implements Operation{
 		}
 		System.out.println("-------------------------");
 		logger.info("地图分界线——————————————————————");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * 英雄初始化，玩家可输入英雄个数，然后输入英雄的各个属性，和一个你想要在地图上显示英雄的形象如‘A’，
 	 * 该函数会将英雄初始化到地图上显示出来
+	 * @throws Throwable 
+	 * 
 	 */
-	public void setHero() {
+	public void setHero() throws Throwable {
+		File file=new File("英雄属性.txt");
+		BufferedReader fcin = null;
+		try {
+			fcin = new BufferedReader(new FileReader(file));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String str=null;
+		
 		Scanner reader=new Scanner(System.in);
-		int hp,mp,exp,m,n,ad,attack;
-		char form='a';
+		
 		/**
 		 * 输入英雄个数
 		 */
 		System.out.println("请输入英雄个数：");
 		logger.info("请输入英雄个数：");
-		HeroNum=reader.nextInt();
+		//HeroNum=reader.nextInt();
+	
+		HeroNum=Integer.parseInt(fcin.readLine());
+		System.out.println(HeroNum);
 		
 		System.out.println("请依次输入英雄的血量，魔法值，经验值，位置nm，形态,攻击力和攻击距离");
 		logger.info("请依次输入英雄的血量，魔法值，经验值，位置nm，形态,攻击力和攻击距离");
@@ -100,15 +126,33 @@ class Map implements Operation{
 		/**
 		 * 输入英雄属性
 		 */
+		int hp=0,mp=0,exp=0,m=0,n=0,ad=0,attack=0;
+		char form='a';
 		for(int i=0;i<HeroNum;i++) {
-			hp=reader.nextInt();
+			hp=Integer.parseInt(fcin.readLine());
+			System.out.print(hp+" ");
+			mp=Integer.parseInt(fcin.readLine());
+			System.out.print(mp+" ");
+			exp=Integer.parseInt(fcin.readLine());
+			System.out.print(exp+" ");
+			n=Integer.parseInt(fcin.readLine());
+			System.out.print(n+" ");
+			m=Integer.parseInt(fcin.readLine());
+			System.out.print(m+" ");
+			form=fcin.readLine().charAt(0);
+			System.out.print(form+" ");
+			attack=Integer.parseInt(fcin.readLine());
+			System.out.print(attack+" ");
+			ad=Integer.parseInt(fcin.readLine());
+			System.out.println(ad);
+			/*hp=reader.nextInt();
 			mp=reader.nextInt();
 			exp=reader.nextInt();
 			n=reader.nextInt();
 			m=reader.nextInt();
 			form=reader.next().charAt(0);
 			attack=reader.nextInt();
-			ad=reader.nextInt();
+			ad=reader.nextInt();*/
 			if(map[n][m]=='|'||map[n][m]=='—') {
 				System.out.println("英雄位置信息错误，请重新输入");
 				logger.info("英雄位置信息错误，请重新输入");
