@@ -12,6 +12,7 @@ import javax.swing.*;
 public class Main {
 	private Object test;
 
+	@SuppressWarnings("deprecation")
 	public static void main(String []args) throws Throwable{
 		JFrame frame=new JFrame("wangzhe");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,11 +46,14 @@ public class Main {
 		gameBoard.setMap(); //将英雄形象更新到地图
 		System.out.println("全军出击");
 		gameBoard.showMap(); //英雄初始化后输出
-		Thread1 thread1=new Thread1(gameBoard);
-		Thread2 thread2=new Thread2(fcin,gameBoard);
+		Thread_ShowMap thread1=new Thread_ShowMap(gameBoard);
+		Thread_Opereation thread2=new Thread_Opereation(fcin,gameBoard,thread1);
+		
 		while(fcin.readLine()!=null) {
-			thread2.run(action);
 			thread1.run();
+			//gameBoard.showMap();
+			//action=fcin.readLine();
+			thread2.run(action);
 		}
 	}
 }

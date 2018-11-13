@@ -9,6 +9,12 @@ import java.util.*;
 class Hero {
 	private int hp;
 	private int mp;
+	public int getMp() {
+		return mp;
+	}
+	public void setMp(int mp) {
+		this.mp = mp;
+	}
 	private int exp;
 	public int getExp() {
 		return exp;
@@ -20,6 +26,12 @@ class Hero {
 		exp+=lt*8;
 	}
 	private int n,m;
+	public void setN(int n) {
+		this.n = n;
+	}
+	public void setM(int m) {
+		this.m = m;
+	}
 	private int level;
 	public void setLevel() {
 		this.level = getLevel()+1;
@@ -31,6 +43,9 @@ class Hero {
 	private int maxHp;
 	private int attack,attackDistance;
 	
+	public void setAttackDistance(int attackDistance) {
+		this.attackDistance = attackDistance;
+	}
 	public int getAttackDistance() {
 		return attackDistance;
 	}
@@ -120,7 +135,7 @@ class Hero {
 		}
 	}
 	/**
-	 * 判断攻击距离是否足够攻击到对方英雄，够则进行攻击，不够则攻击失败，浪费一次攻击的机会
+	 * 判断攻击距离是否足够攻击到对方英雄，够则进行攻击，不够则攻击失败，浪费一次攻击的机会，相当于发呆操作
 	 * @param t 被攻击的英雄
 	 * @return 可以攻击返回1，反之返回0
 	 */
@@ -138,7 +153,7 @@ class Hero {
 		}
 }
 	/**
-	 * 判断攻击距离是否足够攻击到对方野怪，够则进行攻击，不够则攻击失败，浪费一次攻击的机会
+	 * 判断攻击距离是否足够攻击到对方野怪，够则进行攻击，不够则攻击失败，浪费一次攻击的机会，相当于发呆操作
 	 * @param t 被攻击的野怪
 	 * @return 可以攻击返回1，反之返回0
 	 */

@@ -3,20 +3,21 @@ package 王者荣耀;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-class Thread2 implements Runnable{
+class Thread_Opereation extends Thread{
 	BufferedReader fcin;
 	Map gameBoard;
-	//Thread1 thread1;
-	public Thread2(BufferedReader t,Map te) {
+	Thread_ShowMap thread1;
+	public Thread_Opereation(BufferedReader t,Map te,Thread_ShowMap temp) {
 		fcin=t;
 		gameBoard=te;
-		//thread1=temp;
+		thread1=temp;
 	}
 	public void run(String action) throws Throwable {
+		thread1.stop();
 		// TODO Auto-generated method stub
 		action=fcin.readLine();
 		System.out.print(action+" ");
-		if(action.equals("move")) {//移动操作
+		if(action.equals("move")) {
 			char form,direction; 
 			form=fcin.readLine().charAt(0);
 			direction=fcin.readLine().charAt(0);
@@ -48,11 +49,8 @@ class Thread2 implements Runnable{
 			gameBoard.useSkill(form, skill); //使用技能
 			//gameBoard.showMap();
 		}
+		gameBoard.showMap();
+		//Thread.sleep(3000);
 	}
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+
 }

@@ -130,21 +130,21 @@ class Map implements Operation{
 		char form='a';
 		for(int i=0;i<HeroNum;i++) {
 			hp=Integer.parseInt(fcin.readLine());
-			System.out.print(hp+" ");
+			//System.out.print(hp+" ");
 			mp=Integer.parseInt(fcin.readLine());
-			System.out.print(mp+" ");
+			//System.out.print(mp+" ");
 			exp=Integer.parseInt(fcin.readLine());
-			System.out.print(exp+" ");
+			//System.out.print(exp+" ");
 			n=Integer.parseInt(fcin.readLine());
-			System.out.print(n+" ");
+			//System.out.print(n+" ");
 			m=Integer.parseInt(fcin.readLine());
-			System.out.print(m+" ");
+			//System.out.print(m+" ");
 			form=fcin.readLine().charAt(0);
-			System.out.print(form+" ");
+			//System.out.print(form+" ");
 			attack=Integer.parseInt(fcin.readLine());
-			System.out.print(attack+" ");
+			//System.out.print(attack+" ");
 			ad=Integer.parseInt(fcin.readLine());
-			System.out.println(ad);
+			//System.out.println(ad);
 			/*hp=reader.nextInt();
 			mp=reader.nextInt();
 			exp=reader.nextInt();
@@ -153,6 +153,7 @@ class Map implements Operation{
 			form=reader.next().charAt(0);
 			attack=reader.nextInt();
 			ad=reader.nextInt();*/
+			
 			if(map[n][m]=='|'||map[n][m]=='—') {
 				System.out.println("英雄位置信息错误，请重新输入");
 				logger.info("英雄位置信息错误，请重新输入");
@@ -163,6 +164,7 @@ class Map implements Operation{
 			 * 将输入的各属性赋给英雄
 			 */
 			hero[i].initHero(hp, mp, exp, n, m, form,attack,ad);
+			showHeroData(hero[i]);
 		}
 	}
 	public void setMap(){
@@ -174,13 +176,14 @@ class Map implements Operation{
 	 * 移动函数，用于英雄在地图上的上下左右移动（用WSAD表示方向）
 	 */
 	public void Move(char form,char direction) {
+		int flag=1;
 		for(int i=0;i<HeroNum;i++) {
 			if(form==hero[i].getForm()) {
 				
 				if(direction=='W') {
-					if(IsMoveEffevtive(hero[i].getN()-1, hero[i].getM())==1) {
+					if(IsMoveEffevtive(hero[i].getN()-2, hero[i].getM())==1) {
 						map[hero[i].getN()][hero[i].getM()]='.';
-						hero[i].setPosition(hero[i].getN()-1, hero[i].getM());
+						hero[i].setPosition(hero[i].getN()-2, hero[i].getM());
 						map[hero[i].getN()][hero[i].getM()]=hero[i].getForm();
 						System.out.println("移动成功！");
 						logger.info("移动成功！");
@@ -218,7 +221,6 @@ class Map implements Operation{
 					}
 					
 				}
-				
 				break;
 			}
 			
@@ -415,5 +417,11 @@ class Map implements Operation{
 			}
 		}
 		
+	}
+	public void showHeroData(Hero t) {
+		System.out.println(t.getHp()+" "+t.getMp()+" "+t.getExp()
+		+t.getN()+" "+t.getM()
+		+" "+t.getForm()+" "+t.getAttack()
+		+" "+t.getAttackDistance());
 	}
 }
