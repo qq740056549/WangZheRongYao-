@@ -1,5 +1,9 @@
 package 王者荣耀;
-
+/**
+ * 
+ * @author 陈建荣 201719038
+ *     此线程用于打印地图
+ */
 class Thread_ShowMap extends Thread{
 	Map temp;
 	Thread_ShowMap(Map a){

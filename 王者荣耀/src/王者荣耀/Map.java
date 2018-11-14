@@ -173,7 +173,8 @@ class Map implements Operation{
 		}
 	}
 	/**
-	 * 移动函数，用于英雄在地图上的上下左右移动（用WSAD表示方向）
+	 * 移动函数，用于英雄在地图上的上下左右移动（用WSAD表示方向）,近战英雄可以移动1到2个，<br>
+	 * 由电脑生成的随机数控制，远程英雄只能移动1格
 	 */
 	public void Move(char form,char direction) {
 		int flag=1;
@@ -418,6 +419,10 @@ class Map implements Operation{
 		}
 		
 	}
+	/**
+	 * 该函数用于输出英雄的各个属性，比如还剩多少生命值魔法值等。
+	 * @param t 参数t为需要打印信息的英雄
+	 */
 	public void showHeroData(Hero t) {
 		System.out.println(t.getHp()+" "+t.getMp()+" "+t.getExp()
 		+t.getN()+" "+t.getM()

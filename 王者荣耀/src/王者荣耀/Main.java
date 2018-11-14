@@ -50,9 +50,9 @@ public class Main {
 		Thread_Opereation thread2=new Thread_Opereation(fcin,gameBoard,thread1);
 		
 		while(fcin.readLine()!=null) {
-			thread1.run();
+			//thread1.run();
 			//gameBoard.showMap();
-			//action=fcin.readLine();
+			action=fcin.readLine();
 			thread2.run(action);
 		}
 	}

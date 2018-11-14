@@ -2,7 +2,11 @@ package 王者荣耀;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
+/**
+ * 
+ * @author 陈建荣 2017192038
+ * 此线程用于读取操作 
+ */
 class Thread_Opereation extends Thread{
 	BufferedReader fcin;
 	Map gameBoard;
@@ -49,8 +53,8 @@ class Thread_Opereation extends Thread{
 			gameBoard.useSkill(form, skill); //使用技能
 			//gameBoard.showMap();
 		}
-		gameBoard.showMap();
-		//Thread.sleep(3000);
+		//gameBoard.showMap();
+		Thread.sleep(3000);
 	}
 
 }
