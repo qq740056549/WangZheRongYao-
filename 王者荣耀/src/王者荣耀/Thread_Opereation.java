@@ -17,9 +17,8 @@ class Thread_Opereation extends Thread{
 		thread1=temp;
 	}
 	public void run(String action) throws Throwable {
-		thread1.stop();
 		// TODO Auto-generated method stub
-		action=fcin.readLine();
+		//action=fcin.readLine();
 		System.out.print(action+" ");
 		if(action.equals("move")) {
 			char form,direction; 
@@ -54,7 +53,7 @@ class Thread_Opereation extends Thread{
 			//gameBoard.showMap();
 		}
 		//gameBoard.showMap();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 	}
 
 }

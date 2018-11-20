@@ -233,27 +233,30 @@ class Map implements Operation{
 	 * @param m 移动目的地在地图矩阵中的列
 	 * @return 若判断可以移动返回1，反之返回0
 	 */
-	public int  IsMoveEffevtive(int n,int m) {
-		/**
-		 * 判断是否有障碍物
-		 */
-		if(map[n][m]=='|'||map[n][m]=='—') {
-			System.out.println("有障碍物阻挡，移动失败，请重新输入");
-			return 0;
-		}
+	public String  IsMoveEffevtive_(int n,int m) {
+		
 		/**
 		 * 判断是否超出地图
 		 */
-		else if(n<0||n>9||m<0||m>9) {
+		if(n<0||n>9||m<0||m>9) {
 			System.out.println("超出边界，移动失败，请重新输入");
-			return 0;
+			return "超出边界，移动失败，请重新输入";
+			//return -1;
+		}
+		/**
+		 * 判断是否有障碍物
+		 */
+		else if(map[n][m]=='|'||map[n][m]=='—') {
+			System.out.println("有障碍物阻挡，移动失败，请重新输入");
+			return "有障碍物阻挡，移动失败，请重新输入";
 		}
 		/**
 		 * 判断是否有英雄的尸体
 		 */
 		else if(map[n][m]=='*') {
 			System.out.println("前方有尸体，移动失败，请重新输入");
-			return 0;
+			return "前方有尸体，移动失败，请重新输入";
+			//return -2;
 		}
 		/**
 		 * 判断是否有英雄存在该位置
@@ -261,6 +264,41 @@ class Map implements Operation{
 		else if(map[n][m]!='.') {
 			System.out.println("前方位置有英雄，请重新输入");
 		}
+		return "移动成功！";
+		//return 1;
+	}
+	public int IsMoveEffevtive(int n,int m) {
+		/**
+		 * 判断是否有障碍物
+		 */
+		if(map[n][m]=='|'||map[n][m]=='—') {
+			System.out.println("有障碍物阻挡，移动失败，请重新输入");
+			//return "有障碍物阻挡，移动失败，请重新输入";
+			return 0;
+		}
+		/**
+		 * 判断是否超出地图
+		 */
+		else if(n<0||n>9||m<0||m>9) {
+			System.out.println("超出边界，移动失败，请重新输入");
+			//return "超出边界，移动失败，请重新输入";
+			return -1;
+		}
+		/**
+		 * 判断是否有英雄的尸体
+		 */
+		else if(map[n][m]=='*') {
+			System.out.println("前方有尸体，移动失败，请重新输入");
+			//return "前方有尸体，移动失败，请重新输入";
+			return -2;
+		}
+		/**
+		 * 判断是否有英雄存在该位置
+		 */
+		else if(map[n][m]!='.') {
+			System.out.println("前方位置有英雄，请重新输入");
+		}
+		//return "移动成功！";
 		return 1;
 	}
 	/**

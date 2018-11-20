@@ -10,12 +10,11 @@ class Thread_ShowMap extends Thread{
 		temp=a;
 	}
 	public void run() {
-		//int n=10;
 		while(true) {
 			temp.showMap();
 			System.out.println("1sºó");
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

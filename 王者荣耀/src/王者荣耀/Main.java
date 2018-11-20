@@ -24,9 +24,6 @@ public class Main {
 		JButton move=new JButton("move");
 		frame.add(atk,BorderLayout.BEFORE_FIRST_LINE);
 		frame.add(move,BorderLayout.BEFORE_LINE_BEGINS);
-		MouseAdapter listen=new MouseAdapter() {
-			
-		};
 		frame.setVisible(false);
 		
 		
@@ -48,9 +45,10 @@ public class Main {
 		gameBoard.showMap(); //英雄初始化后输出
 		Thread_ShowMap thread1=new Thread_ShowMap(gameBoard);
 		Thread_Opereation thread2=new Thread_Opereation(fcin,gameBoard,thread1);
-		
+		thread1.start();
+		new Test(gameBoard);
 		while(fcin.readLine()!=null) {
-			//thread1.run();
+			
 			//gameBoard.showMap();
 			action=fcin.readLine();
 			thread2.run(action);

@@ -152,6 +152,20 @@ class Hero {
 			return 0;
 		}
 }
+	
+	public String IfCanAttack_(Hero t) {
+		int n1=this.getN(),m1=this.getM();
+		int n2=t.getN(),m2=t.getM();
+		int d1=(n1-n2)*(n1-n2)+(m1-m2)*(m1-m2);
+		if(d1<=this.getAttackDistance()*this.getAttackDistance()) {
+			System.out.println(form+"的攻击距离足够攻击到对手"+t.getForm());
+			return "攻击距离足够攻击到对手";
+		}	
+		else {
+			System.out.println(form+"的攻击距离不足以攻击到对手"+t.getForm());
+			return "攻击距离不足以攻击到对手";
+		}
+}
 	/**
 	 * 判断攻击距离是否足够攻击到对方野怪，够则进行攻击，不够则攻击失败，浪费一次攻击的机会，相当于发呆操作
 	 * @param t 被攻击的野怪
